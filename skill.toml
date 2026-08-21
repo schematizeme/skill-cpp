@@ -1,0 +1,12 @@
+slug = "cpp"
+name = "schematize-cpp"
+tag = "Linguagem · C++ (defensiva)"
+status = "beta"
+order = 32
+current_version = "0.1.0"
+href = "/cpp"
+
+[descriptions]
+pt = "O piso DEFENSIVO de C++: componente novo nasce em Rust ou Zig; C++ entra por ADR de exceção. Para o que existe — RAII como mecanismo (sem new/delete cru), tempo de vida, a lista curta de UB, sanitizers no CI com -fno-sanitize-recover, -Wold-style-cast, catch por referência e fuzzing de parser."
+en = "The DEFENSIVE C++ floor: new system components are born in Rust or Zig; C++ enters by exception ADR. For what exists — RAII as the mechanism (no raw new/delete), lifetimes, the short list of UB, sanitizers in CI with -fno-sanitize-recover, -Wold-style-cast, catch by reference and parser fuzzing."
+es = "El piso DEFENSIVO de C++: un componente nuevo nace en Rust o Zig; C++ entra por ADR de excepción. Para lo que existe — RAII como mecanismo (sin new/delete crudo), tiempos de vida, la lista corta de UB, sanitizers en el CI con -fno-sanitize-recover, -Wold-style-cast, catch por referencia y fuzzing de parser."

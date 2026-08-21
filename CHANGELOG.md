@@ -1,0 +1,16 @@
+# Changelog — schematize-cpp
+
+Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
+com versionamento [SemVer](https://semver.org/lang/pt-BR/).
+
+## [0.1.0] — 2026-08-21
+
+Primeira versão, e **defensiva por decisão**: a vistoria de 2026-08-21 registrou que a casa tem **zero código em C++ hoje** e que o nicho **já está coberto por Rust e Zig no rol** — *o valor desta skill não é "mais opções de backend"*. Ela existe para que o C++ que a casa venha a manter (ou herdar) **não vire vulnerabilidade**.
+
+### Adicionado
+- **`references/escopo.md`** — **componente novo nasce em Rust ou Zig**; C++ entra por **ADR de exceção** (ecossistema que só existe em C++, base grande já mantida, interop pesada com API C++, plataforma certificada). Com o **limite honesto de "modernizar"**: trocar `new`/`delete` por `unique_ptr` num módulo maduro paga; reescrever a hierarquia inteira troca bugs conhecidos por bugs novos.
+- **`references/piso.md`** — **C++ moderno de verdade**, porque *"C com classes" junta os riscos do C com a complexidade do C++ e nenhuma das garantias*: **RAII como mecanismo** (VETADO `new`/`delete` cru — *`delete` que não roda por um `return` antecipado é vazamento; o que roda duas vezes é corrupção*), **regra do zero ou dos cinco** (escrever só o destrutor é o caminho clássico para double-free na cópia implícita), **tempo de vida** (`string_view` para temporário é dangling imediato; lambda `[&]` em código assíncrono; iterador invalidado por `push_back`), a **lista curta de UB** com o ponto que quase ninguém escreve — **UB autoriza o compilador a assumir que aquilo não acontece**, e é assim que uma checagem de `nullptr` **depois** de um deref some do binário otimizado —, sanitizers e flags (`-Wold-style-cast`, **`-D_GLIBCXX_ASSERTIONS`**), exceção (`noexcept` no move é o que faz `vector` mover em vez de copiar; `catch (const X&)`; destrutor não lança), concorrência (`std::jthread`), build por *targets* no CMake.
+- **`scripts/check-cpp.sh`** + **`check-cpp.test.sh`** (**10 casos**, 8 vermelhos): `new`/`delete` cru, `mutex.lock()` manual, `catch (...) {}`, `catch` por valor, `volatile` em thread, `std::thread` sem `join`, string do C dentro de C++, `reinterpret_cast`, cast estilo C; e no build: sem sanitizer, **UBSan sem `-fno-sanitize-recover`**, sem `-Wold-style-cast`, sem `_GLIBCXX_ASSERTIONS`, sem `-std=c++20`.
+
+### Verificado rodando (g++ 14.2.0, nesta máquina)
+- A mesma bateria da `schematize-c`: **ASan** pegou use-after-free, **UBSan** pegou overflow com sinal (e sem sanitizer o programa **saiu 0**), **`-Werror`** reprovou variável não inicializada.
