@@ -61,6 +61,7 @@ Mapa de references:
 9. **`std::atomic`, não `volatile`**; `std::thread` sem `join`/`detach` chama `std::terminate` —
    prefira `std::jthread`.
 10. **Parser tem fuzzing**, e **teste que passa sem sanitizer não prova ausência de UB**.
+11. **Orquestrador não desenvolve; subagent barato executa.** O agent principal só planeja, despacha e revisa; ação onerosa vira micro-tasks para subagents em `sonnet` (falhou → o mesmo subagent corrige → re-decompõe → só então `opus`, com motivo). Detalhe: `schematize-engineering` → `references/orquestracao.md` §9.
 
 ## Relação com as outras skills
 

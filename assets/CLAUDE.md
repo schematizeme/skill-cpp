@@ -17,5 +17,8 @@
 8. **`std::atomic`, não `volatile`**; `std::jthread` em vez de `std::thread` sem `join`.
 9. **Parser tem fuzzing**; dependência com versão fixada.
 10. **Teste que passa sem sanitizer não prova ausência de UB.**
+11. **Orquestrador não desenvolve; subagent barato executa.** O agent principal só planeja, despacha e
+    revisa; ação onerosa vira micro-tasks para subagents em `sonnet` (falhou → o mesmo subagent corrige →
+    re-decompõe → só então `opus`, com motivo). Detalhe: `schematize-engineering` → `references/orquestracao.md` §9.
 
 Gate: `bash .claude/skills/schematize-cpp/scripts/check-cpp.sh .`
