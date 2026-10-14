@@ -10,6 +10,7 @@ Título do `/cpp-help` e ressincronização dos herdados.
 - `assets/commands/cpp-help.md`: a descrição dizia "piso DEFENSIVO de C"; é o piso de **C++** (a skill `schematize-c` é a de C).
 
 ### Alterado
+- Description reduzida (≤235 chars) para caber no orçamento de listagem de skills (soma ≤8300); mesmo território, fronteiras com as irmãs preservadas.
 - Blocos herdados ressincronizados com a `schematize-engineering` v0.27.0 (`tools/sync-herdados.mjs`): orquestração com a regra de imagem (nunca pelo Claude; detecta Codex/Gemini e pergunta ao usuário qual usar, Codex como sugestão) e `schematize overdev delegar` (comando do app) no lugar do falso nome de skill `schematize-overdev`.
 
 ## [0.3.0] — 2026-10-14

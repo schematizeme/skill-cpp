@@ -4,8 +4,7 @@ metadata:
   version: 0.3.0
 description: >-
   Piso defensivo de C++ para manter código existente (*.cpp/*.hpp, CMakeLists.txt); componente novo nasce em Rust ou
-  Zig, C++ só por ADR. Use ao revisar ou corrigir C++: C++20 declarado, sanitizers, clang-tidy, RAII sem new/delete
-  cru. Traz gate executável e template de CI.
+  Zig, C++ só por ADR. Use em C++: sanitizers, clang-tidy, RAII sem new/delete cru. Traz gate e CI.
 ---
 <!-- cross-skill: linguagens.md -> schematize-engineering -->
 
