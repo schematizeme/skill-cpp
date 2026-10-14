@@ -3,8 +3,7 @@ name: schematize-cpp
 metadata:
   version: 0.3.1
 description: >-
-  Piso defensivo de C++ para manter código existente (*.cpp/*.hpp, CMakeLists.txt); componente novo nasce em Rust ou
-  Zig, C++ só por ADR. Use em C++: sanitizers, clang-tidy, RAII sem new/delete cru. Traz gate e CI.
+  Piso defensivo de C++ para manter código existente. Use ao tocar *.cpp/*.hpp ou CMakeLists.txt: sanitizers, clang-tidy, RAII sem new/delete cru. Código novo: Rust ou Zig.
 ---
 <!-- cross-skill: linguagens.md -> schematize-engineering -->
 
