@@ -1,5 +1,5 @@
 ---
-description: Mapa da skill schematize-cpp (o piso DEFENSIVO de C — o padrão é NÃO escrever C++).
+description: Mapa da skill schematize-cpp (o piso DEFENSIVO de C++ — o padrão é NÃO escrever C++).
 ---
 **schematize-cpp** — o piso de C++ da casa.
 
