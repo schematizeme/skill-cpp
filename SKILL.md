@@ -1,7 +1,7 @@
 ---
 name: schematize-cpp
 metadata:
-  version: 0.3.0
+  version: 0.3.1
 description: >-
   Piso defensivo de C++ para manter código existente (*.cpp/*.hpp, CMakeLists.txt); componente novo nasce em Rust ou
   Zig, C++ só por ADR. Use em C++: sanitizers, clang-tidy, RAII sem new/delete cru. Traz gate e CI.
@@ -13,7 +13,7 @@ description: >-
 Skill **defensiva**, irmã da `schematize-c`. Ela não abre a porta do C++: ela mantém em pé o C++ que
 a casa **já tem** ou que é **inevitável**.
 
-**Versão:** skill `schematize-cpp` v0.3.0. Changelog em `CHANGELOG.md`.
+**Versão:** skill `schematize-cpp` v0.3.1. Changelog em `CHANGELOG.md`.
 
 ## Precedência e herança (leia antes de divergir)
 

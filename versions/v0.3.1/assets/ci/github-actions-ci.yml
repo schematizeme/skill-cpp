@@ -1,0 +1,31 @@
+# CI de C++ (schematize-cpp). Copie para .github/workflows/ci.yml e ajuste o alvo.
+# Actions pinadas por SHA completo; troque por bump deliberado (o comentario diz a versao).
+name: ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cpp:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cc: [g++, clang++]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Ferramentas
+        run: sudo apt-get update && sudo apt-get install -y clang clang-tidy clang-format cmake
+      - name: Format (clang-format)
+        run: git ls-files '*.cpp' '*.hpp' '*.h' | xargs -r clang-format --dry-run --Werror
+      - name: compile_commands.json
+        run: cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+      - name: Lint (clang-tidy)
+        run: git ls-files '*.cpp' | xargs -r clang-tidy -p build --warnings-as-errors='*'
+      - name: Build + testes sanitizados (ASan+UBSan, sem recover)
+        env:
+          CXX: ${{ matrix.cc }}
+        run: |
+          cmake -S . -B build -DCMAKE_CXX_STANDARD=20 -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_CXX_FLAGS="-Wall -Wextra -Werror -Wconversion -D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer"
+          cmake --build build
+          ctest --test-dir build --output-on-failure
