@@ -3,7 +3,7 @@ name = "schematize-cpp"
 tag = "Linguagem · C++ (defensiva)"
 status = "beta"
 order = 32
-current_version = "0.3.1"
+current_version = "0.4.0"
 href = "/cpp"
 
 [descriptions]
