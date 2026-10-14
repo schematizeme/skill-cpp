@@ -6,7 +6,7 @@ description: Mapa da skill schematize-cpp (o piso DEFENSIVO de C — o padrão �
 | Comando | O que faz |
 |---|---|
 | `/cpp-help` | esta lista |
-| `/cpp-load` | carrega TODO o corpo normativo (piso, plataforma) e passa a aplicá-lo |
+| `/cpp-load` | carrega TODO o corpo normativo (piso, escopo) e passa a aplicá-lo |
 | `/cpp-review` | roda `scripts/check-cpp.sh` e revisa o que a máquina não lê |
 | `/cpp-claude` | cria ou mescla o `CLAUDE.md` sempre-on na raiz do repo |
 | `/cpp-cc` · `/cpp-handoff` | context compact / handoff no archive |

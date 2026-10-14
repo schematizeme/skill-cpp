@@ -1,0 +1,16 @@
+# .clang-tidy de C++ (schematize-cpp). Lista de checks NO repo, travando o CI.
+Checks: >-
+  -*,
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  concurrency-*,
+  cppcoreguidelines-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  -bugprone-easily-swappable-parameters,
+  -modernize-use-trailing-return-type,
+  -cppcoreguidelines-avoid-magic-numbers
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'

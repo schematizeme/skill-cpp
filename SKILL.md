@@ -2,7 +2,8 @@
 name: schematize-cpp
 metadata:
   version: 0.2.2
-description: O piso de C++ da casa — DEFENSIVO, como o de C: componente novo de sistema nasce em **Rust ou Zig**, e C++ entra por **ADR de exceção** (ecossistema que só existe em C++, base grande já mantida, interop pesada, plataforma certificada). Para o C++ que existe, o piso é **C++ moderno de verdade** — porque "C com classes" junta os riscos do C com a complexidade do C++ e nenhuma das garantias: **RAII como mecanismo** (VETADO `new`/`delete` cru; regra do zero ou dos cinco), tempo de vida (`string_view`/lambda `[&]`/iterador invalidado), a lista curta de UB (e o fato de que **UB autoriza o compilador a assumir que aquilo não acontece** — é assim que a checagem de `nullptr` some do binário), **ASan/UBSan/TSan no CI** com `-fno-sanitize-recover`, `-Wold-style-cast`, `_GLIBCXX_ASSERTIONS`, `noexcept` no move, `catch (const X&)`, `std::jthread` e fuzzing de parser. Traz gate executável que também lê o build.
+description: >-
+  Piso defensivo de C++ da casa para manter código existente (*.cpp/*.hpp, CMakeLists.txt). Componente novo nasce em Rust ou Zig; C++ só por ADR de exceção. Use ao revisar ou corrigir C++: C++20 declarado, sanitizers, clang-tidy, RAII sem new/delete cru, modo hardened da libstdc++. Traz gate executável e template de CI.
 ---
 <!-- cross-skill: linguagens.md -> schematize-engineering -->
 
@@ -12,6 +13,30 @@ Skill **defensiva**, irmã da `schematize-c`. Ela não abre a porta do C++: ela 
 a casa **já tem** ou que é **inevitável**.
 
 **Versão:** skill `schematize-cpp` v0.2.2. Changelog em `CHANGELOG.md`.
+
+## Precedência e herança (leia antes de divergir)
+
+Esta skill é o recorte **C++** das linguagens **sancionadas fora do rol de backend** (`schematize-engineering` → `references/linguagens.md` §2.2): **manutenção defensiva**. Componente novo de sistema nasce em Rust ou Zig, por ADR; C++ não recebe serviço backend novo.
+
+1. **Onde esta skill divergir da base, a BASE MANDA.** Aqui mora a especialização — a lib, o gate, a
+   sintaxe da linguagem. Divergência de *piso* é defeito desta skill, não variante local.
+2. **O que não está repetido aqui é HERDADO, não dispensado.** Valem integralmente, sem cópia local:
+   - **§28 Archive** — `<projeto>/<projeto>_archive/` é **repositório git próprio, PRIVADO e
+     obrigatório**, criticidade 0 (`schematize-archive`).
+   - **§35 Definition of Done** e a lista de anti-padrões (citada por **título**, nunca por número).
+   - **§39 Índice/MAPA** — enumeração exaustiva (uma entrada por unidade chamável, `M == N`) e grafo
+     com arestas em ASCII (`A -> B`), nunca a seta unicode.
+   - **IAM** (`schematize-engineering` → `references/iam.md`): identidade ≠ email, ≥2 fatores, ReBAC
+     multi-tenant, argon2id-only para senha nova, sessão longa e logout irreversível.
+   - **Efeito externo** nunca sai de não-produção (`schematize-engineering` →
+     `references/efeitos-externos.md`).
+   - **Orquestração** (`schematize-engineering` → `references/orquestracao.md` §9): o principal não
+     desenvolve; subagents `sonnet` por padrão, `opus` só após falha.
+3. **QA, ops, IAM e índice não têm comando próprio aqui:** vêm da base `/eng-*`. Para trabalho
+   contínuo use `/eng-overdev`; para planejar `/eng-plan`; para varrer a base `/eng-scan`; para
+   revisão geral `/eng-review` (e `/eng-ops`, `/eng-iam`, `/eng-index`). Os comandos
+   `/cpp-*` cobrem só o piso da linguagem.
+
 
 ## A regra, antes de tudo
 
@@ -43,6 +68,8 @@ Mapa de references:
 | RAII e ponteiro, tempo de vida, a lista curta de UB, sanitizers e flags, exceção e `noexcept`, concorrência, build e dependência, teste | `references/piso.md` |
 | **Onde C++ entra e por que ele não é escolha de fit**; ADR de exceção; o limite honesto de "modernizar"; fronteira com C | `references/escopo.md` |
 | Ferramental verificado, padrão declarado, checks do clang-tidy | `references/stack-versoes.md` |
+
+Assets prontos para copiar: `assets/ci/github-actions-ci.yml` (clang-tidy, clang-format, build C++20 sanitizado com `_GLIBCXX_ASSERTIONS`, ctest) · `assets/lint/.clang-tidy` · `assets/lint/.clang-format`.
 
 ## Pisos inegociáveis (vetam o atalho)
 
